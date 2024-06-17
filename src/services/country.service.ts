@@ -93,7 +93,17 @@ export class CountryService {
 		return await this.getCountryById(id)
 	}
 
-	remove(id: number) {
-		return `This action removes a #${id} country`
+	async deleteCountry(id: number) {
+		const country = await this.countryRepository.findOne({
+			where: { id }
+		})
+
+		if (!country) {
+			throw new NotFoundException(`The Country by id: ${id} has not been found`)
+		}
+
+		await this.countryRepository.delete(id)
+
+		return id
 	}
 }

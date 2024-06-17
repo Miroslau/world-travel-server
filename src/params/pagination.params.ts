@@ -12,7 +12,7 @@ const PaginationParams = createParamDecorator(
 		const page = parseInt(request.query.page as string)
 		const size = parseInt(request.query.size as string)
 
-		if (isNaN(page) || page < 0 || isNaN(size) || size < 0) {
+		if (isNaN(page) || page < 1 || isNaN(size) || size < 0) {
 			throw new BadRequestException('Invalid pagination params')
 		}
 
@@ -23,7 +23,7 @@ const PaginationParams = createParamDecorator(
 		}
 
 		const limit = size
-		const offset = page * limit
+		const offset = (page - 1) * limit
 
 		return {
 			page,

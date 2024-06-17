@@ -58,7 +58,7 @@ export class CountryController {
 	}
 
 	@Delete(':id')
-	remove(@Param('id') id: string) {
-		return this.countryService.remove(+id)
+	deleteCountry(@Param('id') id: number) {
+		return this.countryService.deleteCountry(id)
 	}
 }
